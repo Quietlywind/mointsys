@@ -1,21 +1,36 @@
 import Main from '@/components/main'
 
-Vue.use(Router)
-
-let router= new Router({
-  mode:'history',
-  base:'',
-  routes: [
+export default [
     {
         path:'/login',
         name:'login',
-        meta
-    },  
+        meta:{
+           title:'Login - 登录',
+           hideInMenu : true
+        },
+        component : ()=> import('@/view/login/login.vue')
+    },
     {
       path: '/',
-      name: 'Main',
-      component: Main
+      name: '_home',
+      redirect: '/home',
+      component: Main,
+      meta:{
+        hideInMenu:true,
+        notCache:true
+      },
+      children :[
+        {
+          path:'/home',
+          name:'home',
+          meta:{
+            hideInMenu:true,
+            title:'首页',
+            notCache:true,
+            icon:'md-home'
+          },
+          component : ()=> import('@/view/home/home.vue')
+        }
+      ]
     }
   ]
-})
-export default router

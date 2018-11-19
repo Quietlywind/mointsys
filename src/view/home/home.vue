@@ -31,6 +31,6 @@ export default {
   mounted(){}
 }
 </script>
-<style lang="less" scoped>
+<style>
 .wrapper{}
 </style>
