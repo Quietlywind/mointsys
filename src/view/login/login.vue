@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-con">
-      <Card title="欢迎登录" :bordered="true">
+      <Card title="欢迎登录" :bordered="true" :shadow="false" :dis-hover="false">
         <div class="form-con">
           <Form ref="loginForm" :model="loginForm" :rules="ruleForm" @keydown.enter.native="handleSubmit">
             <FormItem prop="userName">
@@ -19,7 +19,7 @@
               </Input>
             </FormItem>
             <FormItem>
-              <Button type="primary" @click="handleSubmit">登录</Button>
+              <Button type="primary" @click="handleSubmit" long>登录</Button>
             </FormItem>
           </Form>
         </div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   name:'login',
   components:{},
@@ -52,10 +53,18 @@ export default {
   watch:{},
   computed:{},
   methods:{
+    ...mapActions([
+      'handleLogin',
+      'getUserInfo'
+    ]),
     handleSubmit(){
-      this.$ref.loginForm.validate((valid) =>{
+      this.$refs.loginForm.validate((valid) =>{
         if(valid){
-
+          let userName=this.loginForm.userName;
+          let password=this.loginForm.password;
+          this.handleLogin({userName,password}).then(res =>{
+            console.log(res)
+          })
         }
       })
     }

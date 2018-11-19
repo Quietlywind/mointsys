@@ -63,6 +63,7 @@ export default{
         //登录
         handleLogin ({commit},{userName,password}){
             userName = userName.trim()
+            console.log(userName,password)
             return new Promise((resolve,reject)=>{
 
             })
