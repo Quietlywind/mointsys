@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name:'login',
   components:{},
@@ -53,6 +53,7 @@ export default {
   watch:{},
   computed:{},
   methods:{
+    
     ...mapActions([
       'handleLogin',
       'getUserInfo'
@@ -63,14 +64,26 @@ export default {
           let userName=this.loginForm.userName;
           let password=this.loginForm.password;
           this.handleLogin({userName,password}).then(res =>{
-            console.log(res)
+            
           })
         }
       })
-    }
+    },
+    // userToken(){
+    //   this.$axios.post('https://openapi.lechange.cn:443/openapi/accessToken',{
+    //     "params":{
+    //       "phone":"18284518201"
+    //     }
+    //   }).then((res)=>{
+    //     console.log(res)
+    //   }).catch((err)=>{
+
+    //   })
+    // }
   },
   created(){},
-  mounted(){}
+  mounted(){
+  }
 }
 </script>
 <style lang="less">
