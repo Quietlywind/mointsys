@@ -66,13 +66,16 @@ export const getRouteTitleHandled = (route) =>{
   return router
 }
 
-// export const showTitle = (item,vm) =>{
-//   let {title, __titleIsFunction__ } = item.meta
-//   if(!title) return
-//   if(vm.$config.useI18n){
-
-//   }
-// }
+export const showTitle = (item,vm) =>{
+  let {title, __titleIsFunction__ } = item.meta
+  if(!title) return
+  if(vm.$config.useI18n){
+    if (title.includes('{{') && title.includes('}}') && vm.$config.useI18n) title = title.replace(/({{[\s\S]+?}})/, (m, str) => str.replace(/{{([\s\S]*)}}/, (m, _) => vm.$t(_.trim())))
+    else if (__titleIsFunction__) title = item.meta.title
+    else title = vm.$t(item.name)
+  }else title = (item.meta && item.meta.title) || item.name
+  return title
+}
 
 /**
  * @description 本地存储和获取标签导航列表
@@ -189,6 +192,18 @@ export const doCustomTimes = (times,callback) =>{
   let i= -1;
   while(++i < times){
     callback(i)
+  }
+}
+
+export const findNodeUpperByClasses = (ele, classes) => {
+  let parentNode = ele.parentNode
+  if (parentNode) {
+    let classList = parentNode.classList
+    if (classList && classes.every(className => classList.contains(className))) {
+      return parentNode
+    } else {
+      return findNodeUpperByClasses(parentNode, classes)
+    }
   }
 }
 

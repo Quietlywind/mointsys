@@ -13,11 +13,19 @@
     <Layout>
       <Sider hide-trigger collapsible :width="124" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
         <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
-
         </side-menu>
         <sider-trigger :collapsed="collapsed" icon="md-menu" @on-coll-change="handleCollapsedChange"></sider-trigger>
       </Sider>
-      <Content></Content>
+      <Content class="main-content-con">
+        <Layout class="main-layout-con">
+          <div class="tag-nav-wrapper">
+
+          </div>
+          <Content class="content-wrapper">
+            <router-view/>
+          </Content>
+        </Layout>
+      </Content>
     </Layout>
   </Layout>
 </template>
