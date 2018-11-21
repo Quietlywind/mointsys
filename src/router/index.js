@@ -25,25 +25,27 @@ const LOGIN_PAGE_NAME = 'login' //定义常量login
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
-  const token = getToken();
-  if(!token && to.name !== LOGIN_PAGE_NAME){
-    //未登录且要跳转的页面不是登录页
-    next({
-      name:LOGIN_PAGE_NAME  //跳转到登录页
-    })
-  }else if(!token && to.name === LOGIN_PAGE_NAME){
-    //未登录且要跳转的页面是登录页
-    next(); //跳转
-  }else if(token && to.name === LOGIN_PAGE_NAME){
-    //已登录且要跳转的页面是登录页
-    next({
-      name: homeName  //跳转到homeName页
-    })
-  }else{
-    setToken('')
-    next({
-      name:'login'
-    })
+  next();
+  // const token = getToken();
+  // if(!token && to.name !== LOGIN_PAGE_NAME){
+  //   //未登录且要跳转的页面不是登录页
+  //   next({
+  //     name:LOGIN_PAGE_NAME  //跳转到登录页
+  //   })
+  // }else if(!token && to.name === LOGIN_PAGE_NAME){
+  //   //未登录且要跳转的页面是登录页
+  //   next(); //跳转
+  // }else if(token && to.name === LOGIN_PAGE_NAME){
+  //   //已登录且要跳转的页面是登录页
+  //   next({
+  //     name: homeName  //跳转到homeName页
+  //   })
+  // }else{
+  //   console.log(4)
+  //   setToken('')
+  //   next({
+  //     name:'login'
+  //   })
     // if(store.state.user.hasGetInfo){
     //   turnTo(to,state.state.user.access,next)
     // }else{
@@ -57,7 +59,7 @@ router.beforeEach((to, from, next) => {
     //     })
     //   })
     // }
-  }
+  // }
 });
 
 router.afterEach((to, from, next) => {

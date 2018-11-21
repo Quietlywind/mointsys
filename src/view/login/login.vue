@@ -61,10 +61,15 @@ export default {
     handleSubmit(){
       this.$refs.loginForm.validate((valid) =>{
         if(valid){
+          let that=this;
           let userName=this.loginForm.userName;
           let password=this.loginForm.password;
           this.handleLogin({userName,password}).then(res =>{
-            
+            // that.getUserInfo().then(res=>{
+              that.$router.push({
+                name:this.$config.homeName
+              })
+            // })
           })
         }
       })
