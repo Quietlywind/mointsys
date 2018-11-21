@@ -1,6 +1,6 @@
 <template>
   <Layout style="height:100%" class="main">
-    <Header>
+    <Header class="header-con">
       <div class="logo-con">
         <!-- style="padding-left:8px;" -->
         <img src="../../assets/logo.png">
@@ -11,10 +11,13 @@
       </div>
     </Header>
     <Layout>
-      <Sider hide-trigger>
-        <sider-trigger :collapsed="collapsed" @on-coll-change="handleCollapsedChange"></sider-trigger>
+      <Sider hide-trigger collapsible :width="124" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
+        <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
+
+        </side-menu>
+        <sider-trigger :collapsed="collapsed" icon="md-menu" @on-coll-change="handleCollapsedChange"></sider-trigger>
       </Sider>
-      <Content>Content</Content>
+      <Content></Content>
     </Layout>
   </Layout>
 </template>

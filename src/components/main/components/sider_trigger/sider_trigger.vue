@@ -15,15 +15,28 @@ export default {
   components: {
 
   },
-  props:{},
+  props:{
+    collapsed: Boolean,
+    icon:{
+      type:String,
+      default:'navicon-round'
+    },
+    size:{
+      type:Number,
+      default:26
+    }
+  },
   watch:{},
   computed:{},
-  methods:{},
+  methods:{
+    handleChange(state){
+      this.$emit('on-coll-change',!this.collapsed)
+    }
+  },
   created(){},
   mounted(){}
 }
 </script>
-
-<style scoped>
-.page{}
+<style lang="less">
+@import './sider_trigger.less';
 </style>
