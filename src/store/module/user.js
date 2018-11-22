@@ -1,8 +1,6 @@
 
 
 import {setToken,getToken} from '@/libs/util'
-import { stat } from 'fs';
-import { resolve } from 'url';
 
 export default{
     state:{

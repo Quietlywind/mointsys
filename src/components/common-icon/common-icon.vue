@@ -30,13 +30,14 @@ export default {
       return this.iconType === 'Icons' ? this.getCustomIconName(this.type) : this.type
     },
     iconSize () {
-      return this.size || (this.iconType === 'Icons' ? 12 : undefined)
+      return this.size || (this.iconType === 'Icons' ? 14 : undefined)
     },
     iconColor () {
       return this.color || ''
     }
   },
   methods:{
+    //判断是否是iview自带的图标返回自定义图标名
     getCustomIconName (iconName) {
       return iconName.slice(1)
     }

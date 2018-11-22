@@ -13,17 +13,16 @@ import {
 import router from '@/router'
 import routers from '@/router/routers'
 import config from '@/config'
-import { get } from 'https';
 
 const {homeName} = config
 
-const closePage = (state,route) =>{
-    const nextRoute = getNextRoute(stata.tagNavList,route)
-    state.tagNavList = state.tagNavList.filter(item=>{
-        return !routeEqual(item,route)
+const closePage = (state, route) => {
+    const nextRoute = getNextRoute(state.tagNavList, route)
+    state.tagNavList = state.tagNavList.filter(item => {
+      return !routeEqual(item, route)
     })
     router.push(nextRoute)
-}
+  }
 
 export default {
     state:{
@@ -70,19 +69,15 @@ export default {
                 })
             }
         },
-        addTag (state,{route,type='unshift'}){
+        addTag (state, { route, type = 'unshift' }) {
             let router = getRouteTitleHandled(route)
-            if(!routeHasExist(state.tagNavList,router)){
-                if(type === "push"){
-                    state.tagNavList.push(router)
-                }else{
-                    if(router.name === homeName){
-                        state.tagNavList.unshift(router)
-                    }else{
-                        state.tagNavList.splice(1,0,router)
-                    }
-                }
-                setTagNavListInLocalstorage([...state.tagNavList])
+            if (!routeHasExist(state.tagNavList, router)) {
+              if (type === 'push') state.tagNavList.push(router)
+              else {
+                if (router.name === homeName) state.tagNavList.unshift(router)
+                else state.tagNavList.splice(1, 0, router)
+              }
+              setTagNavListInLocalstorage([...state.tagNavList])
             }
         },
         setLocal (state,lang){

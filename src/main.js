@@ -7,7 +7,14 @@ import store from './store'
 import axios from 'axios'
 import iView from 'iview'
 import config from '@/config'
+
 import 'iview/dist/styles/iview.css'
+// 自定义图标css文件
+import '@/assets/icons/iconfont.css'
+//leaflet地图css文件
+import 'leaflet/dist/leaflet.css'
+
+import jquery from 'jquery'
 
 /**
  * @description 生产环境关掉提示

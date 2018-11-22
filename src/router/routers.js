@@ -41,7 +41,7 @@ export default [
       component:Main,
       meta:{
         // hideInBread:true
-        icon:'logo-buffer',
+        icon:'md-desktop',
         title:'远程监控'
       },
       children:[
@@ -86,7 +86,7 @@ export default [
           path:'security_check',
           name:'security_check',
           meta:{
-            icon: 'md-home',
+            icon: 'md-checkbox-outline',
             title:'安全检查'
           },
           component:() =>import('@/view/security_check/index.vue')
@@ -97,7 +97,7 @@ export default [
       path: '/knowledge',
       name: 'knowledge',
       meta: {
-        icon: 'logo-buffer',
+        icon: 'ios-book',
         title: '知识公告'
       },
       component: Main,
@@ -126,7 +126,7 @@ export default [
       path:'/configure',
       name:'configure',
       meta:{
-        icon: 'logo-buffer',
+        icon: 'md-settings',
         title: '配置管理'
       },
       component: Main,
