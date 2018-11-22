@@ -1,7 +1,11 @@
-L.TileLayer.ChinaProvider = L.TileLayer.extend({
+// this js is refer to https://github.com/htoooth/Leaflet.ChineseTmsProviders
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoicGxheW5pdW5pdSIsImEiOiJjOWMyYjA3MTU1MDFmMWM1OTM2OTM5YzczODRkM2U0NSJ9.OC4GhScXX0FqODs-2_vSuw';
+
+L.TileLayer.MapProvider = L.TileLayer.extend({
 
     initialize: function(type, options) { // (type, Object)
-        var providers = L.TileLayer.ChinaProvider.providers;
+        var providers = L.TileLayer.MapProvider.providers;
 
         var parts = type.split('.');
 
@@ -16,30 +20,30 @@ L.TileLayer.ChinaProvider = L.TileLayer.extend({
     }
 });
 
-L.TileLayer.ChinaProvider.providers = {
+L.TileLayer.MapProvider.providers = {
     TianDiTu: {
         Normal: {
             Map: "http://t{s}.tianditu.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}",
-            Annotion: "http://t{s}.tianditu.cn/DataServer?T=cva_w&X={x}&Y={y}&L={z}"
+            Annotion: "http://t{s}.tianditu.cn/DataServer?T=cva_w&X={x}&Y={y}&L={z}",
         },
         Satellite: {
             Map: "http://t{s}.tianditu.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}",
-            Annotion: "http://t{s}.tianditu.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}"
+            Annotion: "http://t{s}.tianditu.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}",
         },
         Terrain: {
             Map: "http://t{s}.tianditu.cn/DataServer?T=ter_w&X={x}&Y={y}&L={z}",
-            Annotion: "http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}"
+            Annotion: "http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}",
         },
         Subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
     },
 
     GaoDe: {
         Normal: {
-            Map: 'http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}'
+            Map: '//webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
         },
         Satellite: {
-            Map: 'http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
-            Annotion: 'http://webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}'
+            Map: '//webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
+            Annotion: '//webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}'
         },
         Subdomains: ["1", "2", "3", "4"]
     },
@@ -65,9 +69,23 @@ L.TileLayer.ChinaProvider.providers = {
         },
         Subdomains: []
 
+    },
+
+    OSM: {
+        Normal: {
+            Map: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        },
+        Subdomains: ['a','b','c']
+    },
+
+    Mapbox: {
+        Normal: {
+            Map: "https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=" + MAPBOX_TOKEN,
+        },
+        Subdomains: ['a','b','c','d']
     }
 };
 
-L.tileLayer.chinaProvider = function(type, options) {
-    return new L.TileLayer.ChinaProvider(type, options);
+L.tileLayer.mapProvider = function(type, options) {
+    return new L.TileLayer.MapProvider(type, options);
 };

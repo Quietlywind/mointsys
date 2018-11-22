@@ -1,16 +1,17 @@
 <template>
-  <div class="map" id="map" style="width:100%;height:100%;">
-      
+  <div style="width:auto;height:100%;">
+    <div class="map" id="map" style="width:100%;height:100%;">  
+    </div>
   </div>
 </template>
 
 <script>
-import L from 'leaflet'
+import Leaflet from 'leaflet'
+import mapProvider from './leaflet.MapProviders.js'
+// import '@/assets/leaflet/js/leaflet.ChineseTmsProviders.js'
 
 export default {
-  components:{
-
-  },
+  components:{},
   props:{},
   data(){
     return {
@@ -19,7 +20,6 @@ export default {
       map_config:{
         center:[30.657445, 104.065757],
         zoom:6,
-        layers:null,
         minZoom:6,
         maxZoom:18,
         opacity:0.1,
@@ -32,23 +32,25 @@ export default {
   computed:{},
   methods:{
     initMap(){
-      this.map = L.map('map',{
+      this.map =new L.map('map',{
         center:this.map_config.center,
         zoom:this.map_config.center,
         minZoom:this.map_config.minZoom,
         maxZoom:this.map_config.maxZoom,
-        zoomControl:this.map_config.zoomControl,
-        attribution:this.map_config.attribution
+        zoomControl:this.map_config.zoomControl
       })
-    }
+    },
+    addMapLayer() {
+                L.tileLayer.mapProvider('GaoDe.Normal.Map',
+                    {attribution: this.map_config.attribution}).addTo(this.map);
+            },
   },
   created(){},
   mounted(){
     this.initMap()
+    this.addMapLayer()
   }
 }
-import './home.js'
 </script>
 <style lang="less">
-@import './home.less';
 </style>
