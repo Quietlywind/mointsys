@@ -18,7 +18,7 @@ export default [
       redirect: '/home',
       component: Main,
       meta:{
-        hideInMenu:true,
+        hideInMenu:false,
         notCache:true
       },
       children :[

@@ -12,9 +12,9 @@
     </Header>
     <Layout>
       <Sider hide-trigger collapsible :width="124" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
+        <sider-trigger :collapsed="collapsed" icon="md-menu" @on-coll-change="handleCollapsedChange"></sider-trigger>
         <side-menu accordion ref="sideMenu" :active-name="$route.name" :collapsed="collapsed" @on-select="turnToPage" :menu-list="menuList">
         </side-menu>
-        <sider-trigger :collapsed="collapsed" icon="md-menu" @on-coll-change="handleCollapsedChange"></sider-trigger>
       </Sider>
       <Content class="main-content-con">
         <Layout class="main-layout-con">
@@ -131,9 +131,9 @@ export default {
      */
     this.setTagNavList()
     this.setHomeRoute(routers)
-    this.addTag({
-      route:this.$store.state.app.homeName
-    })
+    // this.addTag({
+    //   route:this.$store.state.app.homeName
+    // })
     //如果当前打开页面不存在标签栏中，则跳转到homeName页
     if(!this.tagNavList.find(item =>item.name === this.$route.name)){
       this.$router.push({

@@ -52,8 +52,9 @@ export const getMenuByRouter = (list,access) =>{
 }
 
 export const getRouteTitleHandled = (route) =>{
-  let router ={...route}
-  let meta={...route.meta}
+  console.log(meta)
+  let router = {...route}
+  let meta = {...route.meta}
   let title = ''
   if(meta.title){
     if(typeof meta.title === 'function'){
