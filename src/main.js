@@ -8,6 +8,7 @@ import axios from 'axios'
 import iView from 'iview'
 import config from '@/config'
 import { L } from 'vue2-leaflet';
+import './mock/index'
 
 import 'iview/dist/styles/iview.css'
 // 自定义图标css文件
