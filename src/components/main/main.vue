@@ -11,10 +11,10 @@
       </div>
       <div class="header-content">
         <user></user>
-        <div style="float:right;color:#fff;cursor:pointer;margin-right: 12px;">
+        <!-- <div style="float:right;color:#fff;cursor:pointer;margin-right: 12px;">
           <Icon type="ios-contact-outline" :size="26"/>
           <span>告警通知</span>
-        </div>
+        </div> -->
       </div>
     </Header>
     <Layout>

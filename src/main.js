@@ -7,6 +7,7 @@ import store from './store'
 import axios from 'axios'
 import iView from 'iview'
 import config from '@/config'
+import { L } from 'vue2-leaflet';
 
 import 'iview/dist/styles/iview.css'
 // 自定义图标css文件
@@ -21,6 +22,14 @@ import jquery from 'jquery'
  */
 Vue.config.productionTip = false
 
+/* leaflet icon */
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
+
 /**
  * @description 全局注册应用配置
  */
@@ -32,6 +41,9 @@ Vue.prototype.$config = config
 Vue.prototype.$axios = axios
 
 Vue.use(iView)
+
+
+
 
 //全局配置进度条
 // iView.LoadingBar.config({

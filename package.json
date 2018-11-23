@@ -21,10 +21,12 @@
     "leaflet.chinatmsproviders": "^2.0.2",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "mockjs": "^1.0.1-beta3",
     "opn": "^5.4.0",
     "video.js": "^7.3.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue2-leaflet": "^1.2.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

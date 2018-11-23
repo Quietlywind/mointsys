@@ -18,6 +18,13 @@ module.exports = {
           '^/ms': ''
         }
       },
+      '/mapurl': {
+        changeOrigin: true,
+        target: 'http://192.168.0.104',
+        pathRewrite: {
+          '^/mapurl': ''
+        }
+      },
     },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
