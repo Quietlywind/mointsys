@@ -11,7 +11,6 @@ Vue.use(Router)
 const router = new Router({
     routes,
     mode : 'history',
-    // base:'',
 })
 const LOGIN_PAGE_NAME = 'login' //定义常量login  
 

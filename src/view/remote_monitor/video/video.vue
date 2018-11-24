@@ -1,7 +1,7 @@
 <template>
-  <div style="padding: 18px;">
+  <div style="padding: 10px;" class="remote_video">
     <Row :gutter="16">
-      <Col span="24" />
+      <Col span="24">
         <Form ref="formInline" :mode="formInline" :rules="ruleInline" inline :label-width="60">
           <FormItem prop="deviceName" :label-width="0">
               <Input v-model="formInline.deviceName" placeholder="输入设备名称/编码"></Input>
@@ -17,12 +17,14 @@
             <Button type="primary" @click="search">查询</Button>
           </FormItem>
         </Form>
+      </Col>
       <Col span="24" />
         <Table border :loading="loading" 
             :columns="tablecolums1" 
             :data="tableData" 
             no-data-text="暂无数据">
         </Table>
+      </Col>
     </Row>
   </div>
 </template>
@@ -52,7 +54,27 @@ export default {
         {title:'视频安装地点', key:'deviceAddress',ellipsis:true,tooltip:true},
         {title:'视频状态', key:'deviceStatus'},
         {title:'设备安装时间',key:'deviceTime',sortable:true},
-        {title:'操作',key:'operation'}
+        {title:'操作',key:'operation',width: 150,align: 'center',
+          render:(h,params) =>{
+            return h('div',[
+                h('a',{
+                  props:{
+                    type:'primary',
+                    size:'small'
+                  },
+                  style:{
+                    cursor: 'pointer',
+                    fontWeight:'700'
+                  },
+                  on:{
+                    click:()=>{
+                      this.showVideo(params.row)
+                    }
+                  }
+                },'进入视频')
+            ])
+          }
+        }
       ],
       tableData:[],
       loading:true,
@@ -69,13 +91,15 @@ export default {
     search(){
       this.loading=true;
       let params = Object.assign({}, this.formInline);
-      console.log(params)
       this.$axios.get('/videoData').then((res)=>{
         this.tableData=res.data
         this.loading=false
       }).catch((err)=>{
         console.log(err)
       })
+    },
+    showVideo(row){
+      console.log(row.deviceId)
     }
   },
   created(){},
@@ -86,5 +110,5 @@ export default {
 </script>
 
 <style scoped>
-.page{}
+
 </style>

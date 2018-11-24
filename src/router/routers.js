@@ -94,6 +94,54 @@ export default [
       ]
     },
     {
+      path:'/worklist',
+      name:'worklist',
+      component:Main,
+      meta:{
+        hideInBread:true,
+      },
+      children:[
+        {
+          path:'work_list',
+          name:'work_list',
+          meta:{
+            icon: 'md-alarm',
+            title:'工单列表'
+          },
+          component:() =>import('@/view/work_list/work_list.vue')
+        }
+      ]
+    },
+    {
+      path: '/statistical',
+      name: 'statistical',
+      meta: {
+        icon: 'ios-book',
+        title: '统计分析'
+      },
+      component: Main,
+      children:[
+        {
+          path:'line_history',
+          name:'line_history',
+          meta:{
+            icon:'md-trending-up',
+            title:'线路历史数据'
+          },
+          component:() => import('@/view/statistical_analysis/line_history/line_history.vue')
+        },
+        {
+          path:'transformer_ratio',
+          name:'transformer_ratio',
+          meta:{
+            icon:'md-trending-up',
+            title:'变压器占比'
+          },
+          component:() => import('@/view/statistical_analysis/transformer_ratio/transformer_ratio.vue')
+        }
+      ]
+    },
+    {
       path: '/knowledge',
       name: 'knowledge',
       meta: {
@@ -176,15 +224,15 @@ export default [
           },
           component:() => import('@/view/configure_manage/user_set/user_set.vue')
         },
-        {
-          path:'sms_set',
-          name:'sms_set',
-          meta:{
-            icon:'md-trending-up',
-            title:'短信通知管理'
-          },
-          component:() => import('@/view/configure_manage/sms_set/sms_set.vue')
-        },
+        // {
+        //   path:'sms_set',
+        //   name:'sms_set',
+        //   meta:{
+        //     icon:'md-trending-up',
+        //     title:'短信通知管理'
+        //   },
+        //   component:() => import('@/view/configure_manage/sms_set/sms_set.vue')
+        // },
         {
           path:'message_set',
           name:'message_set',
@@ -194,6 +242,26 @@ export default [
           },
           component:() => import('@/view/configure_manage/message_set/message_set.vue')
         },
+      ]
+    },
+    {
+      path:'/order',
+      name:'order',
+      meta: {
+        hideInMenu: true
+      },
+      component: Main,
+      children:[
+        {
+          path:'order_create',
+          name:'order_create',
+          meta:{
+            icon: 'md-flower',
+            title:route => `工单-${route.query.id}`,
+            notCache:true
+          },
+          component: () => import('@/view/order_create/order_create.vue')
+        }
       ]
     }
   ]

@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 18px;">
+  <div style="padding: 10px;" class="remote_operation">
     <Row :gutter="16">
       <Col span="24">
         <Form ref="formInline" :mode="formInline" :rules="ruleInline" inline :label-width="60">

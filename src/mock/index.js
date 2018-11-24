@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import {operationData,videoData} from './data'
+import {operationData,videoData,earlyDate,securityData,workorderData,equipmentData} from './data'
 
 // 配置Ajax请求延时，可用来测试网络延迟大时项目中一些效果
 Mock.setup({
@@ -10,3 +10,7 @@ Mock.setup({
 // Mock.mock(/\/get_opera_data/,operationData)
 Mock.mock('/operationData',operationData)
 Mock.mock('/videoData',videoData)
+Mock.mock(/\/earlyDate/,earlyDate)
+Mock.mock(/\/securityData/,securityData)
+Mock.mock(/\/workorderData/,workorderData)
+Mock.mock(/\/equipmentData/,equipmentData)
