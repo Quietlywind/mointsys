@@ -47,7 +47,7 @@ export default {
       page:1,
       tableData:[],
        tablecolums1:[
-        {title:'工单编号',key:'id'},
+        {title:'工单编号',key:'id',ellipsis:true,tooltip:true,},
         {title:'派发时间',key:'time',ellipsis:true,tooltip:true,sortable:true},
         {title:'派发内容', key:'content',ellipsis:true,tooltip:true},
         {title:'负责人', key:'person'},

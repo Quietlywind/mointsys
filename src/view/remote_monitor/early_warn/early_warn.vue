@@ -1,7 +1,7 @@
 <template>
   <div class="remote_early_warn" style="padding: 10px;">
     <Row :gutter="16">
-      <Col span="24">
+      <i-col span="24">
         <Form ref="formInline" :mode="formInline" :rules="ruleInline" inline :label-width="60">
           <FormItem prop="deviceName" :label-width="0">
               <Input v-model="formInline.deviceName" placeholder="输入设备名称"></Input>
@@ -20,8 +20,8 @@
             <Button type="primary" @click="hanldeSearch">查询</Button>
           </FormItem>
         </Form>
-      </Col>  
-      <Col span="24" >
+      </i-col>  
+      <i-col span="24" >
         <Table border :loading="loading" 
             :columns="tablecolums1" 
             :data="nowData" 
@@ -34,7 +34,7 @@
           show-total show-sizer show-elevator
           style="margin-top: 10px;font-size: 14px;text-align: right;">
         </Page>
-      </Col>    
+      </i-col>    
     </Row>
   </div>
 </template>
@@ -148,7 +148,8 @@ export default {
         name:'order_create',
         query:{
           id:row.id,
-          name:row.handlePerson
+          name:row.handlePerson,
+          status:0,
         },
         meta:{
           title:`参数-${row.id}`
@@ -165,5 +166,5 @@ export default {
 </script>
 
 <style scoped>
-.page{}
+.remote_early_warn{}
 </style>

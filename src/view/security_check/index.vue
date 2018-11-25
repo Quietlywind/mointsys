@@ -1,13 +1,13 @@
 <template>
   <div class="security_page">
     <Row>
-      <Col span="24">
+      <i-col span="24">
         <Table border :loading="loading" 
             :columns="tablecolums1" 
             :data="tableData" 
             no-data-text="暂无数据">
         </Table>
-      </Col>
+      </i-col>
     </Row>
   </div>
 </template>

@@ -25,36 +25,37 @@
     <Modal 
       v-model="modalLoading"
       :loading="fomrloading"
-      class-name="equipment_modal">
+      class-name="equipment_modal"
+      @on-ok="submitForm">
       <p slot="header" style="font-size:16px;text-align:center">
         <span>{{modaltitle}}</span>
       </p>
-      <Form ref="formDe" :mode="formDe" :rules="ruleForm" :label-width="96">
-        <FormItem prop="id" label="设备编码">
-            <Input v-model="formDe.id" placeholder="请输入设备编码" />
+      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="96">
+        <FormItem label="设备编码" prop="id">
+            <Input v-model="formValidate.id" ref="one" :disabled="inputDis" placeholder="请输入设备编码" />
         </FormItem>
-        <FormItem prop="name" label="设备名称">
-            <Input v-model="formDe.name" placeholder="请输入设备名称" />
+        <FormItem label="设备名称" prop="name">
+            <Input v-model="formValidate.name" placeholder="请输入设备名称" />
         </FormItem>
-        <FormItem prop="type" label="设备类型">
-          <Select v-model="formDe.DeviceData">
+        <FormItem label="设备类型" prop="type">
+          <Select v-model="formValidate.type">
               <Option v-for="item in DeviceData" :value="item.value" :key="item.value" :label="item.label">
                 {{item.label}}
               </Option>
           </Select>
         </FormItem>
-        <FormItem prop="lng" label="设备经度">
-            <Input v-model="formDe.lng" placeholder="请输入设备经度" />
+        <FormItem label="设备经度" prop="lng">
+            <Input v-model="formValidate.lng" placeholder="请输入设备经度" />
         </FormItem>
-        <FormItem prop="lat" label="设备纬度">
-            <Input v-model="formDe.lat" placeholder="请输入设备纬度" />
+        <FormItem label="设备纬度" prop="lat">
+            <Input v-model="formValidate.lat" placeholder="请输入设备纬度" />
         </FormItem>
-        <FormItem prop="lat" label="设备安装地点">
-            <Input v-model="formDe.place" placeholder="请输入设备纬度" />
+        <FormItem label="设备安装地点" prop="place">
+            <Input v-model="formValidate.place" placeholder="请输入设备纬度" />
         </FormItem>
-        <FormItem prop="time" label="设备安装时间">
+        <FormItem label="设备安装时间" prop="time">
             <DatePicker type="datetime" style="width:100%" format="yyyy-MM-dd HH:mm" 
-            placeholder="选择日期时间" v-model="formDe.time"></DatePicker>
+            placeholder="选择日期时间" v-model="formValidate.time"></DatePicker>
         </FormItem>
       </Form>
     </Modal>
@@ -69,6 +70,7 @@ export default {
       loading:true, //表格加载loading
       modalLoading:false, //设备新增/修改模态打开loading
       fomrloading:true,
+      inputDis:true,
       modaltitle:'新增设备',
       limit:10,
       page:1,
@@ -140,7 +142,7 @@ export default {
         {value:'台变',label:'台变'},
         {value:'箱变',label:'箱变'},
       ],
-      formDe:{
+      formValidate:{
         id:'',
         name:'',
         type:'',
@@ -149,9 +151,14 @@ export default {
         place:'',
         time:''
       },
-      ruleForm:{
-
-      },
+      ruleValidate:{
+        // id: [
+        //     { required: true, message: 'The name cannot be empty', trigger: 'blur' }
+        // ],
+        // name: [
+        //     { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
+        // ],
+      }
     }
   },
   components: {
@@ -196,21 +203,38 @@ export default {
     //表格修改设备事件
     editdevice(row){
       this.modalLoading=true;
-      this.formDe = Object.assign({}, row);
-      console.log(this.formDe)
+      this.inputDis=true;
+      this.modaltitle="修改设备";
+      this.$refs.formValidate.resetFields();
+      this.formValidate = Object.assign({}, row);
+      console.log(this.formValidate)
     },
     //表格新增设备事件
     adddevice(){
       this.modalLoading=true;
+      this.inputDis=false;
+      this.modaltitle="新增设备"
+      this.$nextTick(function() {
+        this.$refs.formValidate.resetFields();
+      })
     },
-    //表格禁用启用设备事件
-    switchDeal(row){
-      console.log(row)
+    //表格禁用/启用设备事件
+    switchDeal(flag){
+      if(flag){
+        this.$message.success({showClose: true, message: '启用设备成功', duration: 1500});
+      }else{
+        this.$message.error({showClose: true, message: '禁用设备成功', duration: 1500});
+      }
+    },
+    //表单提交事件
+    submitForm(){
+      this.modalLoading=false;
+      console.log(this.formValidate)
     },
   },
   created(){},
   mounted(){
-    this.handleSearch()
+    this.handleSearch()  
   }
 }
 </script>
@@ -218,5 +242,13 @@ export default {
 <style lang="less">
 .equipment_modal .ivu-form .ivu-form-item-label{
   font-size:14px;
+}
+.equipment_modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .ivu-modal{
+    top: 0;
+  }
 }
 </style>

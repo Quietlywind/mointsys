@@ -7,9 +7,11 @@ import store from './store'
 import axios from 'axios'
 import iView from 'iview'
 import config from '@/config'
-import { L } from 'vue2-leaflet';
+import { L } from 'vue2-leaflet'
 import './mock/index'
+import {MessageBox,Message} from 'element-ui'
 
+import 'element-ui/lib/theme-chalk/index.css';
 import 'iview/dist/styles/iview.css'
 // 自定义图标css文件
 import '@/assets/icons/iconfont.css'
@@ -18,11 +20,6 @@ import 'leaflet/dist/leaflet.css'
 
 import jquery from 'jquery'
 
-/**
- * @description 生产环境关掉提示
- */
-Vue.config.productionTip = false
-
 /* leaflet icon */
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -30,21 +27,29 @@ L.Icon.Default.mergeOptions({
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
-
+/**
+ * @description 生产环境关掉提示
+ */
+Vue.config.productionTip = false
 /**
  * @description 全局注册应用配置
  */
 Vue.prototype.$config = config
-
 /**
  * @description 全局axios请求配置
  */
 Vue.prototype.$axios = axios
+/**
+ * @description 全局axios请求配置
+ */
+/**
+ * @description 全局element-ui的弹框配置
+ */
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$confirm = MessageBox.confirm;
+Vue.prototype.$message = Message;
 
 Vue.use(iView)
-
-
-
 
 //全局配置进度条
 // iView.LoadingBar.config({

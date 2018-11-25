@@ -1,8 +1,24 @@
 <template>
-  <div class="page">
-    <Button @click="start">Start</Button>
-      <Button @click="finish">Finish</Button>
-      <Button @click="error">Error</Button>
+  <div class="power_knowledge">
+    <Row :gutter="16">
+      <i-col :span="24">
+        <Card>
+          <Row>
+            <span style="float:left;line-height: 32px;">知识标题：</span>
+            <i-col :span="20">
+              <Input size="default" v-model="knowledge_titile" suffix="md-list-box" placeholder="请输入知识标题" />
+            </i-col>
+          </Row>
+        </Card>
+      </i-col>
+      <i-col :span="24" style="margin-top:15px;text-align: right;padding-right:20px;">
+        <Button type="primary" >保存</Button>
+      </i-col>
+    </Row>
+    <!-- <i-editor v-model="content" :write-name="title">
+
+    </i-editor>
+    {{content}} -->
   </div>
 </template>
 
@@ -10,7 +26,8 @@
 export default {
   data() {
     return {
-
+      content:'',
+      knowledge_titile:'',
     }
   },
   components: {
@@ -20,15 +37,7 @@ export default {
   watch:{},
   computed:{},
   methods:{
-    start () {
-        this.$Loading.start();
-    },
-    finish () {
-        this.$Loading.finish();
-    },
-    error () {
-        this.$Loading.error();
-    }
+    
   },
   created(){},
   mounted(){}
@@ -36,5 +45,7 @@ export default {
 </script>
 
 <style scoped>
-.page{}
+.power_knowledge{
+
+}
 </style>

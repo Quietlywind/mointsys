@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 10px;" class="remote_operation">
     <Row :gutter="16">
-      <Col span="24">
+      <i-col span="24">
         <Form ref="formInline" :mode="formInline" :rules="ruleInline" inline :label-width="60">
           <FormItem prop="deviceName" :label-width="0">
             <Input v-model="formInline.deviceName" placeholder="输入设备名称/编码"></Input>
@@ -24,8 +24,8 @@
             <Button type="primary" @click="search">查询</Button>
           </FormItem>
         </Form>
-      </Col>
-      <Col span="24">
+      </i-col>
+      <i-col span="24">
         <!-- <Card> -->
           <Table border :loading="loading" 
             :columns="tablecolums1" 
@@ -35,7 +35,7 @@
             :row-class-name="rowClassName">
           </Table>
         <!-- </Card>   -->
-      </Col>
+      </i-col>
     </Row>
   </div>
 </template>
