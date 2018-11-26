@@ -8,6 +8,7 @@ import axios from 'axios'
 import iView from 'iview'
 import config from '@/config'
 import { L } from 'vue2-leaflet'
+import "babel-polyfill"
 import './mock/index'
 import {MessageBox,Message} from 'element-ui'
 

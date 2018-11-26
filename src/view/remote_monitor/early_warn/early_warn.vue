@@ -152,7 +152,7 @@ export default {
           status:0,
         },
         meta:{
-          title:`参数-${row.id}`
+          title:`工单-${row.id}`
         }
       }
       this.$router.push(route)

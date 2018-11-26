@@ -23,6 +23,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import Editor from '@comp/editor' //引入富文本编辑器
 export default {
   data() {
     return {
@@ -31,7 +32,7 @@ export default {
     }
   },
   components: {
-
+    Editor
   },
   props:{},
   watch:{},

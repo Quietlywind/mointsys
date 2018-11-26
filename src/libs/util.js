@@ -130,8 +130,12 @@ export const getNewTagList = (list,newRoute) => {
  * @param {*} route 路由列表
  */
 const hasAccess = (access, route) => {
-    if (route.meta && route.meta.access) return hasOneOf(access, route.meta.access)
-    else return true
+    console.log(route.meta)
+    if (route.meta && route.meta.access){
+      return hasOneOf(access, route.meta.access)
+    }else{
+      return true
+    }
 }
 
 /**
@@ -185,7 +189,7 @@ export const getNextRoute = (list, route) => {
 }
 
 /**
- * @param {Number} times 回调函数需要执行的次数
+ * @param {Number} times 回调函数需要执行的次数 用于mock数据
  * @param {Function} callback 回调函数
  */
 export const doCustomTimes = (times,callback) =>{
