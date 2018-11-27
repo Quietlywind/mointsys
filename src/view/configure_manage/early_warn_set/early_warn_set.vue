@@ -19,26 +19,30 @@
           </thead>
           <tbody>
             <tr>
-              <td style="text-align:center;">安全区间</td>
-              <td style="text-align:center;">
+              <td>安全区间</td>
+              <td>
                 <Input v-model="value1" style="width:70px;"/>
                 <span>&lt;=电流&lt;=</span>
                 <Input v-model="value2"  style="width:70px;"/>
               </td>
               <td>
                 <Input v-model="value3" style="width:70px;"/>
-                <span>&lt;=电压&lt;=</span>
-                <Input v-model="value4" style="width:70px;"/>
-              </td>
-              <td>
+                <span>&lt;=低压&lt;=</span>
+                <Input v-model="value4" style="width:70px;"/><br />
+                <span style="padding:5px 0px;display: block;"></span>
                 <Input v-model="value5" style="width:70px;"/>
-                <span>&lt;=功率因素&lt;=</span>
+                <span>&lt;=高压&lt;=</span>
                 <Input v-model="value6" style="width:70px;"/>
               </td>
               <td>
                 <Input v-model="value7" style="width:70px;"/>
-                <span>&lt;=温度&lt;=</span>
+                <span>&lt;=功率因素&lt;=</span>
                 <Input v-model="value8" style="width:70px;"/>
+              </td>
+              <td>
+                <Input v-model="value9" style="width:70px;"/>
+                <span>&lt;=温度&lt;=</span>
+                <Input v-model="value10" style="width:70px;"/>
               </td>
             </tr>
           </tbody>
@@ -60,6 +64,8 @@ export default {
       value6:'',
       value7:'',
       value8:'',
+      value9:'',
+      value10:''
     }
   },
   components: {
@@ -102,5 +108,6 @@ table.early_warn_table{
     border-style: solid;
     border-color: #666666;
     background-color: #ffffff;
+    text-align:center;
   }
 </style>

@@ -24,7 +24,7 @@
           @on-upload-success="onEditorUploadComplete"></editor>
       </i-col>
       <i-col :span="24" style="margin-top:15px;text-align: right;padding-right:20px;">
-        <Button type="primary" @click="editors">保存</Button>
+        <Button type="primary" @click="knowledgeSubmit">保存</Button>
       </i-col>
     </Row>
     
@@ -36,9 +36,9 @@ import Editor from '@comp/editor' //引入富文本编辑器
 export default {
   data() {
     return {
-      knowledge_titile:'',
+      knowledge_titile:'', //知识标题
       editorSetting:{ // 配置富文本编辑器高
-        height: 300
+        height: 350
       },
       Url:'',
       MaxSize: 75765, // 文件大小
@@ -54,11 +54,13 @@ export default {
   watch:{},
   computed:{},
   methods:{
-    editors(item){ // editor组件传过来的值赋给content
-      console.log(item)
-      // this.content = val
+    editors(val){ // editor组件传过来的值赋给content
+      this.content = val
     },
-    onEditorReady(ins, ina) { // 上传失败的函数
+    knowledgeSubmit(){ //提交保存电力知识
+      console.log(this.content)
+    },
+    onEditorReady(ins, ina) { // 上传图片失败的函数
         console.log('ins')
         console.log(ins)
         console.log(ina)
@@ -71,7 +73,9 @@ export default {
     }
   },
   created(){},
-  mounted(){}
+  mounted(){
+
+  }
 }
 </script>
 

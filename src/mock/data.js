@@ -112,3 +112,21 @@ export const equipmentData = req =>{
     })
     return tableData
 }
+const jobData=['超级管理员','一般管理员','职员'];
+const userStatus=['0','1'];
+//用户管理假数据
+export const userData = req =>{
+    let tableData =[];
+    doCustomTimes(15,()=>{
+        tableData.push(Mock.mock({
+            name:'@name',
+            userName:'@cname',
+            phone:/^1[386759][1-9]\d{8}/,
+            position:jobData[Math.floor((Math.random()*jobData.length))],
+            status:userStatus[Math.floor((Math.random()*userStatus.length))],
+            img:Random.image('240x400'),
+            action:''
+        }))
+    })
+    return tableData
+}

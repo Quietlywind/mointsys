@@ -2,7 +2,9 @@
   <div class="configure_equipment" style="padding:10px;">
     <Row :gutter="16">
       <i-col :span="24">
-        <div style="text-align:right;margin-bottom:15px;padding-right: 8px;">
+        <Input v-model="deviceName" placeholder="请输入设备名称/编码/地点进行查询" style="width:250px" clearable />
+        <Button type="primary" @click="handleSearch">查询</Button>
+        <div style="display: inline-block;float:right;margin-bottom:15px;padding-right: 8px;">
           <Button type="primary" @click="adddevice">新增设备</Button>
         </div>
       </i-col>
@@ -24,7 +26,7 @@
     <!-- 新增/修改设备模态框 -->
     <Modal 
       v-model="modalLoading"
-      :loading="fomrloading"
+      :loading="formloading"
       class-name="equipment_modal"
       @on-ok="submitForm">
       <p slot="header" style="font-size:16px;text-align:center">
@@ -68,9 +70,10 @@ export default {
   data() {
     return {
       loading:true, //表格加载loading
-      modalLoading:false, //设备新增/修改模态打开loading
-      fomrloading:true,
-      inputDis:true,
+      modalLoading:false, //设备新增/修改模态打开状态
+      formloading:true,
+      inputDis:true,  //编辑状态设备编码置灰
+      deviceName:'', //设备管理查询条件
       modaltitle:'新增设备',
       limit:10,
       page:1,
@@ -186,10 +189,11 @@ export default {
     search(){
       this.loading=true;
       let params={
+        deviceName:this.deviceName,
         page:this.page,
         limit:this.limit
       }
-      this.$axios.get('/equipmentData').then((res)=>{
+      this.$axios.post('/equipmentData').then((res)=>{
         this.dataCount = res.data.length;
         this.tableData=res.data
         for(let i=0;i<this.limit;i++){
@@ -243,12 +247,12 @@ export default {
 .equipment_modal .ivu-form .ivu-form-item-label{
   font-size:14px;
 }
-.equipment_modal{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .ivu-modal{
-    top: 0;
-  }
-}
+// .equipment_modal{
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   .ivu-modal{
+//     top: 0;
+//   }
+// }
 </style>

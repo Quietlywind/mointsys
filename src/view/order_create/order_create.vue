@@ -3,10 +3,10 @@
     <Row :gutter="16">
       <i-col :span="24" class="order_create_step">
         <Steps :current="status">
-            <Step title="开始" :content="startTime"></Step>
-            <Step title="处理中" :content="middleTime"></Step>
-            <Step title="已完成" :content="endTime"></Step>
-            <Step title="已归档" :content="finishTime"></Step>
+            <Step title="派发工单" :content="startTime"></Step>
+            <Step title="待处理" :content="middleTime"></Step>
+            <Step title="处理中" :content="endTime"></Step>
+            <Step title="已完成" :content="finishTime"></Step>
         </Steps>
       </i-col>
       <i-col :span="24" style="margin-top:20px;">
