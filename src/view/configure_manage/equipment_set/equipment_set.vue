@@ -28,7 +28,8 @@
       v-model="modalLoading"
       :loading="formloading"
       class-name="equipment_modal"
-      @on-ok="submitForm">
+      @on-ok="submitForm"
+      :width="420">
       <p slot="header" style="font-size:16px;text-align:center">
         <span>{{modaltitle}}</span>
       </p>
@@ -247,12 +248,15 @@ export default {
 .equipment_modal .ivu-form .ivu-form-item-label{
   font-size:14px;
 }
-// .equipment_modal{
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   .ivu-modal{
-//     top: 0;
-//   }
-// }
+.equipment_modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .ivu-modal{
+    top: 0;
+  }
+  .ivu-modal-body{
+    padding-bottom: 0px;
+  }
+}
 </style>

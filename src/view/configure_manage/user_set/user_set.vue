@@ -24,12 +24,7 @@
       </i-col>
     </Row>
     <!-- 新增/修改用户模态框 -->
-    <Modal
-      v-model="modalLoading"
-      :loading="formloading1"
-      class-name="user_modal"
-      @on-ok="submitForm"
-      :width="420">
+    <Modal v-model="modalLoading" class-name="user_modal" :width="420">
       <p slot="header" style="font-size:16px;text-align:center">
         <span>{{modaltitle}}</span>
       </p>
@@ -69,14 +64,28 @@
         <FormItem label="登录密码" prop="password" v-if="modaltitle === '新增用户'">
           <Input type="password" v-model="userForm.password" placeholder="请输入登录密码" />
         </FormItem>
+        <FormItem label="头像" prop="image">
+          <Upload action="//jsonplaceholder.typicode.com/posts/"
+            :show-upload-list="true"
+            ref="upload" 
+            accept=".jpg,.png,.jpeg"
+            :before-upload="uploadbefore"
+            :on-success="uploadsuccess"
+            :on-progress="uploadprogress">
+              <Button icon="ios-cloud-upload-outline" type="primary">上传头像</Button>
+          </Upload>
+          <div v-if="fileImg !== null">Upload file: {{ fileImg.name }} 
+            <img :src='fileImg.name' />
+          </div>
+        </FormItem>
       </Form>
+      <div slot="footer">
+        <Button type="text" @click="cancelModal">取消</Button>
+        <Button type="primary" :loading="formloading1" @click="submitForm">确定</Button>
+      </div>
     </Modal>
     <!-- 用户重置密码模态框 -->
-    <Modal v-model="resetLoading"
-      :loading="formloading2"
-      class="reset_modal"
-      @on-ok="submitReset"
-      :width="420">
+    <Modal v-model="resetLoading" class="reset_modal" :width="420">
       <p slot="header" style="font-size:16px;text-align:center">
         <span>重置密码</span>
       </p>
@@ -88,12 +97,15 @@
             <Input type="password" v-model="resetForm.passwdCheck" />
         </FormItem>
       </Form>
+      <div slot="footer">
+        <Button type="text" @click="cancelReset">取消</Button>
+        <Button type="primary" :loading="formloading2" @click="submitReset">确定</Button>
+      </div>
     </Modal>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-// import resetForm from '@comp/reset_pass/reset_pass.vue'
 export default {
   data() {
     const validatePass = (rule,value,callback) =>{
@@ -117,13 +129,14 @@ export default {
         }
     };
     return {
+      fileImg:null,
       resetLoading:false, //用户重置密码模态打开状态
       resetData:{}, //用户重置密码数据
       userName:'', //查询条件用户姓名
       loading:true, //表格加载loading
       modalLoading:false, //用户新增/修改模态打开状态
-      formloading1:true, //用户新增/修改提交表单点击确定加载loading
-      formloading2:true, //用户重置密码提交表单点击确定加载loading
+      formloading1:false, //用户新增/修改提交表单点击确定加载loading
+      formloading2:false, //用户重置密码提交表单点击确定加载loading
       inputDisabled:true,  //编辑状态用户登录名置灰
       modaltitle:'新增用户', //初始化modal标题名称
       limit:10,
@@ -294,6 +307,7 @@ export default {
     },
     adduser(){ //新增用户
       this.modalLoading=true;
+      this.formloading1=false;
       this.modaltitle="新增用户";
       this.userForm.name="";
       this.$nextTick(()=>{
@@ -302,21 +316,25 @@ export default {
     },
     edituser(row){ //编辑用户
       this.modalLoading=true;
+      this.formloading1=false;
       this.modaltitle="编辑用户";
       this.$refs.userForm.resetFields();
       this.userForm = Object.assign({}, row);
     },
     //新增/编辑用户表单提交事件
     submitForm(){
-      // this.modalLoading=false;
+     this.formloading1=true;
      let params = Object.assign({}, this.userForm);
      this.$refs.userForm.validate((valid) => {
           if (valid) {
-              // this.$Message.success('Success!');
+            // this.formloading1=true;
           } else {
-              // this.$Message.error('Fail!');
+            this.formloading1=false;
           }
       })
+    },
+    cancelModal(){ //新增/编辑用户表单取消事件
+      this.modalLoading=false;
     },
     deluser(row){ //删除用户
       this.$confirm('是否删除该用户?', '提示', {type: 'warning'}).then(() => {
@@ -328,6 +346,7 @@ export default {
     },
     resetPass(row){ //重置密码模态事件
       this.resetLoading=true;
+      this.formloading2=false;
       this.$nextTick(()=>{
         this.$refs.resetForm.resetFields();
       })
@@ -335,14 +354,37 @@ export default {
     },
     //重置密码表单提交
     submitReset(){
-      
+      this.formloading2=true;
       this.$refs.resetForm.validate((valid) => {
           if(valid){
+            // setTimeout(() => {
+            //   this.formloading2 = true;
+            //   this.$nextTick(() => {
+            //     this.formloading2 = false;
+            //   });
+            // }, 2000);
             // this.formloading2=true;
+          }else{
+            this.formloading2=false;
           }
       })
     },
-    
+    cancelReset(){ //用户重置密码表单取消事件
+      this.resetLoading=true;
+    },
+    uploadbefore(file){
+      console.log(file)
+      this.fileImg=file;
+      return false;
+    },
+    uploadprogress(event,file,fileList){
+      
+    },
+    uploadsuccess(res,file,fileList){
+      console.log(res)
+      console.log(file)
+      console.log(fileList)
+    }
   },
   created(){},
   mounted(){
@@ -363,8 +405,16 @@ export default {
   box-sizing: border-box;
   width: 70px;
 }
-.user_modal .ivu-modal-body{
+.user_modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .ivu-modal{
+    top: 0;
+  }
+  .ivu-modal-body{
   padding-bottom: 0px;
+  }
 }
 .edit_user_text{
   display:inline-block;
